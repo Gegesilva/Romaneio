@@ -50,7 +50,7 @@
         } 
     ?>
 <body>
-  
+  <img src="media/logo.png" width="100px" height="24px" alt="Logo">
   <div class="nome-doc">
     <div class='titulo-cab'><b>TERMO DE INSTALAÇÃO DE EQUIPAMENTO</b></div>
  </div>
@@ -140,7 +140,9 @@
               TB01010_NOME Equipamento,
               TB02054_PAT Patrimonio,
               TB02176_END EndEquip,
-              TB02022_PRODUTO Produto
+              TB02022_PRODUTO Produto,
+              COALESCE((SELECT TOP 1 TB02115_CONTPB FROM TB02115 WHERE TB02115_CONTRATO = TB02111_CODIGO AND TB02115_PRODUTO = TB02022_PRODUTO AND TB02115_NUMSERIE = TB02055_NUMSERIE AND TB02115_CODCLI = '00000000' ORDER BY TB02115_DATA DESC),
+	            TB02054_MEDIDORPB) LeituraInicial
             
             
             FROM TB02021
@@ -184,20 +186,25 @@
             $tabela .= "<tr>";
             $tabela .= "<td width = '60%;'><b>Local de Instalação: </b>&nbsp;".$row['EndEquip']."</td>";
             $tabela .= "</tr>";
-            
-
+            $tabela .= "<tr>";
+            $tabela .= "<td width = '60%;'><b>Leitura Inicial: </b>&nbsp;".$row['LeituraInicial']."</td>";
+            $tabela .= "</tr>";
+            $tabela .= "<tr>";
+            $tabela .= "<td width = '60%;'><b>Medidor </b></td>";
+            $tabela .= "</tr>";
                           $sql1 = " 
                                   SELECT * FROM GS_ROM_INSTAL_DETAL
-                                  WHERE Venda = 'E00080'
+                                  WHERE NumSerie = '$row[NumSerie]'
                                   ";
                               $stmt1 = sqlsrv_query($conn, $sql1);
                                 
                               while ($row1 = sqlsrv_fetch_array($stmt1, SQLSRV_FETCH_ASSOC))
                               {
                                     $tabela .= "<tr>";
-                                    $tabela.= "<td><b>Leitura Inicia:</b>&nbsp;00000</td>";
+                                    $tabela.= "<td>Franquia: $row1[Franquia] páginas Valor: R$ $row1[valor] Adicional: $row1[Excedente] por página excedente</td>";
                                     $tabela.= "</tr>";
-                              }                                
+                              } 
+              /* $tabela .= "<tr><td></td></tr>  <tr><td></td></tr>  <tr><td></td></tr>"; */                               
       }
         $tabela .= "</table>";
         
