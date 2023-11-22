@@ -185,27 +185,19 @@
             $tabela .= "<td width = '60%;'><b>Local de Instalação: </b>&nbsp;".$row['EndEquip']."</td>";
             $tabela .= "</tr>";
             
-            ?>
 
-    <table class="table table-borderless table-sm" style="font-size: 11px;">
-      <?php
-
-            
                           $sql1 = " 
-                          
+                                  SELECT * FROM GS_ROM_INSTAL_DETAL
+                                  WHERE Venda = 'E00080'
                                   ";
                               $stmt1 = sqlsrv_query($conn, $sql1);
                                 
                               while ($row1 = sqlsrv_fetch_array($stmt1, SQLSRV_FETCH_ASSOC))
                               {
-                                    $tabela1 .= "<tr>";
-                                    $tabela1 .= "<td><b>Leitura Inicia:</b>&nbsp;00000</td>";
-                                    $tabela1 .= "</tr>";
-                              }
-              $tabela1 .= "</table>";
-            print($tabela1);
-                                
-                  
+                                    $tabela .= "<tr>";
+                                    $tabela.= "<td><b>Leitura Inicia:</b>&nbsp;00000</td>";
+                                    $tabela.= "</tr>";
+                              }                                
       }
         $tabela .= "</table>";
         
