@@ -272,33 +272,6 @@
   </div>
 
 <hr> <!-- LINHA CENTRAL -->
-<?php
-        $sql = " 
-        SELECT TOP 1
-          Observacao,
-        CASE
-          WHEN Tipo = 'VENDA' THEN 'ENTREGUES'
-          WHEN Tipo = 'COMPRA' THEN 'RETIRADOS'
-          END TipoFrase,
-          CASE
-          WHEN Tipo = 'VENDA' THEN 'Entregador'
-          WHEN Tipo = 'COMPRA' THEN 'Conferente'
-          END QuemAssin
-        FROM 
-          GS_ROMANEIO
-        WHERE 
-            Pedido = '$cod'
-            --AND Observacao IS NOT NULL
-			      --AND Observacao != ''
-        
-        ";
-      $stmt = sqlsrv_query($conn, $sql);
-        
-        if($stmt === false)
-        {
-          die (print_r(sqlsrv_errors(), true));
-        }
-      ?>
 
    <div class="table-assin">                            
       <table>
