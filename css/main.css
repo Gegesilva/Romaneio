@@ -36,6 +36,15 @@ body{
       align-items: center;
       margin-right: 0;
    }
+
+   .table-assin2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-right: 0;
+      margin-left: 5rem;
+   }
+
    .obs{
       border: 1px solid;
       border-color: black;
