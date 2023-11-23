@@ -201,21 +201,24 @@
                               while ($row1 = sqlsrv_fetch_array($stmt1, SQLSRV_FETCH_ASSOC))
                               {
                                     $franquia = "Franquia: ".$row1['Franquia'];
-                                    $vlrPaginas = $row1['Paginas'];
-                                    $vlr = "Valor: ".$row1['valor'];
-                                    $excedente = " Adicional: ".$row1['Excedente']." por página excedente";
+                                    $paginas = $row1['Paginas']." Páginas ";
+                                    $vlrPaginas = "Valor: ".$row1['valor'];
+                                    $excedente = " Adicional: ".$row1['valor']." por página excedente";
 
 
                                     if($row1['TipoCobertura'] == 'N' && $row1['TipoCobertura'] >= 0 && $row1['TipoRateio'] != 4){
-                                      $textoMedidor = $franquia." ".$vlr.$excedente;
+                                      $textoMedidor = $franquia." ".$paginas;
                                     }
                                       elseif($row1['TipoCobertura'] == 'E'){
-                                        $textoMedidor = $vlrPaginas." páginas";
+                                        $textoMedidor = $excedente;
                                       }
+                                        elseif($row1['TipoCobertura'] == 'S'){
+                                          $textoMedidor = $vlrPaginas." por página.";
+                                        }
 
 
                                     $tabela .= "<tr>";
-                                    $tabela.= "<td> $textoMedidor </td>";
+                                    $tabela.= "<td>&nbsp; $textoMedidor </td>";
                                     $tabela.= "</tr>";
                               } 
               /* $tabela .= "<tr><td></td></tr>  <tr><td></td></tr>  <tr><td></td></tr>"; */                               

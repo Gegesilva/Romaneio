@@ -1,6 +1,6 @@
 ﻿<?php
   $serverName = 'localhost';
-  $connectionInfo = array("Database"=>"repromaq", "UID"=>"sa", "PWD"=>"databit@2022", "CharacterSet"=>"UTF-8");
+  $connectionInfo = array("Database"=>"REPROMAQ", "UID"=>"sa", "PWD"=>"databit@2022", "CharacterSet"=>"UTF-8");
   $conn = sqlsrv_connect($serverName, $connectionInfo);
   if($conn){
     echo "";
