@@ -202,13 +202,20 @@
                               {
                                     $franquia = "Franquia: ".$row1['Franquia'];
                                     $vlrPaginas = $row1['Paginas'];
-                                    $vlr = "Valor: R$".$row1['valor'];
-                                    $excedente = "Adicional: ".$row1['Excedente']." por página excedente";
+                                    $vlr = "Valor: ".$row1['valor'];
+                                    $excedente = " Adicional: ".$row1['Excedente']." por página excedente";
 
 
-                                    
+                                    if($row1['TipoCobertura'] == 'N' && $row1['TipoCobertura'] >= 0 && $row1['TipoRateio'] != 4){
+                                      $textoMedidor = $franquia." ".$vlr.$excedente;
+                                    }
+                                      elseif($row1['TipoCobertura'] == 'E'){
+                                        $textoMedidor = $vlrPaginas." páginas";
+                                      }
+
+
                                     $tabela .= "<tr>";
-                                    $tabela.= "<td> $franquia $vlrPaginas páginas $vlr $excedente</td>";
+                                    $tabela.= "<td> $textoMedidor </td>";
                                     $tabela.= "</tr>";
                               } 
               /* $tabela .= "<tr><td></td></tr>  <tr><td></td></tr>  <tr><td></td></tr>"; */                               
