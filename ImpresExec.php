@@ -200,8 +200,15 @@
                                 
                               while ($row1 = sqlsrv_fetch_array($stmt1, SQLSRV_FETCH_ASSOC))
                               {
+                                    $franquia = "Franquia: ".$row1['Franquia'];
+                                    $vlrPaginas = $row1['Paginas'];
+                                    $vlr = "Valor: R$".$row1['valor'];
+                                    $excedente = "Adicional: ".$row1['Excedente']." por página excedente";
+
+
+                                    
                                     $tabela .= "<tr>";
-                                    $tabela.= "<td>Franquia: $row1[Franquia] páginas Valor: R$ $row1[valor] Adicional: $row1[Excedente] por página excedente</td>";
+                                    $tabela.= "<td> $franquia $vlrPaginas páginas $vlr $excedente</td>";
                                     $tabela.= "</tr>";
                               } 
               /* $tabela .= "<tr><td></td></tr>  <tr><td></td></tr>  <tr><td></td></tr>"; */                               
