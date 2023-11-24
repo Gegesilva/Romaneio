@@ -1,6 +1,6 @@
 ﻿
 <?php
-  $cod = $_GET['cod'];
+  $cod = $_POST['cod'];
   include_once("conexaoSQL.php");
 ?>
 
@@ -19,7 +19,7 @@
     <title>APNET</title>
   </head>
 <body>
-  <!-- <a href="http://localhost:8090/phpprod/ligprint/romaneio/impres.php"> -->
+  <a href="http://localhost:8090/phpprod/ligprint/romaneio/impresDESINST.php">
     <img src="media/logo.png" width="100px" height="24px" alt="Logo">
   </a>
   <div class="nome-doc">

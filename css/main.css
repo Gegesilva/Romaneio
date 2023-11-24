@@ -133,3 +133,7 @@ body{
    img{
       float: right;
    }
+
+   .divBtn{
+      display: flex;
+   }

@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styleExibicao.css">
 
     <title>APNET</title>
   </head>
@@ -61,14 +62,17 @@ body{
           </div>
             <img src="media/logo.png" width="115" height="34" style="margin-left: 10px; border-radius: 20px;"  class="d-inline-block align-top" alt="">
           <div class="mx-auto order-0">
-              <a class="navbar-brand mx-auto" href="#"> <b>TERMO DE INSTALAÇÃO</b>
+              <a class="navbar-brand mx-auto" href="#"> <b>TERMO DE DESINSTALAÇÃO</b>
                     
-                    <div>
-                    <form method="post" action="http://localhost:8090/phpprod/ligprint/romaneio/ImpresExec.php">
+                  <div class="divBtn">
+                    <form method="post" action="http://localhost:8090/phpprod/ligprint/romaneio/ImpresExecDESINST.php">
 
                         <input class="inputcod" type="text" name="cod" autofocus="true">
-                        <input type="submit">
+                         <input class="btnInserir" type="submit" value="Gerar">
                         <!-- <button id="btn">Imprimir</button> -->
+                      </form>
+                      <form action="http://localhost:8090/phpprod/ligprint/romaneio/gerencial.php">
+                        <input class="voltar-fil" type="submit" value="Voltar">
                       </form>
                     </div>  
               </a>
