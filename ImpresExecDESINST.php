@@ -216,7 +216,7 @@
                                     LEFT JOIN TB02185 ON TB02185_CONTRATO = TB02111_CODIGO
                                     LEFT JOIN TB02186 ON TB02186_GRUPO = TB02112_GRUPO
                                     WHERE 
-                                      -- --TB02030_OPERACAO = '02'
+                                       --TB02030_OPERACAO = '02'
                                       TB02208_NUMSERIE = '$row[NumSerie]'
                                       AND TB02111_CODIGO = '$row[Contrato]'
                                       AND TB02030_CODIGO = '$row[Pedido]'
