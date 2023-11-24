@@ -137,3 +137,7 @@ body{
    .divBtn{
       display: flex;
    }
+   
+   .titulo-cab{
+      color: blue;
+   }
