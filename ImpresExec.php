@@ -128,7 +128,8 @@
               TB02176_END EndEquip,
               TB02022_PRODUTO Produto,
               COALESCE((SELECT TOP 1 TB02115_CONTPB FROM TB02115 WHERE TB02115_CONTRATO = TB02111_CODIGO AND TB02115_PRODUTO = TB02022_PRODUTO AND TB02115_NUMSERIE = TB02055_NUMSERIE AND TB02115_CODCLI = '00000000' ORDER BY TB02115_DATA DESC),
-	            TB02054_MEDIDORPB) LeituraInicial
+	            TB02054_MEDIDORPB) LeituraInicial,
+              TB02111_CODIGO Contrato
             
             
             FROM TB02021
@@ -181,7 +182,7 @@
                           $sql1 = " 
                                       SELECT DISTINCT
                                               --EMPRESA
-                                              TB02021_CODIGO Venda,
+                                            TB02021_CODIGO Venda,
                                             TB02111_CODIGO Contrato,
                                             TB01010_NOME Equipamento,
                                             TB02055_PAT Patrimonio,
@@ -230,6 +231,8 @@
                                           WHERE 
                                           -- --TB02021_OPERACAO = '02'
                                           TB02055_NUMSERIE = '$row[NumSerie]'
+                                          AND TB02021_CODIGO = '$row[Venda]'
+                                          AND TB02111_CODIGO = '$row[Contrato]'
                                   ";
                               $stmt1 = sqlsrv_query($conn, $sql1);
                                 
