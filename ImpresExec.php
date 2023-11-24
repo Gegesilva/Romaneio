@@ -229,10 +229,10 @@
                                           LEFT JOIN TB02185 ON TB02185_CONTRATO = TB02111_CODIGO
                                           LEFT JOIN TB02186 ON TB02186_GRUPO = TB02112_GRUPO
                                           WHERE 
-                                          -- --TB02021_OPERACAO = '02'
-                                          TB02055_NUMSERIE = '$row[NumSerie]'
-                                          AND TB02021_CODIGO = '$row[Venda]'
-                                          AND TB02111_CODIGO = '$row[Contrato]'
+                                            -- --TB02021_OPERACAO = '02'
+                                            TB02055_NUMSERIE = '$row[NumSerie]'
+                                            AND TB02021_CODIGO = '$row[Venda]'
+                                            AND TB02111_CODIGO = '$row[Contrato]'
                                   ";
                               $stmt1 = sqlsrv_query($conn, $sql1);
                                 
