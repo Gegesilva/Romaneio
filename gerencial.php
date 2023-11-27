@@ -88,6 +88,12 @@
                   <form class="form-btn" action="http://localhost:8090/phpprod/ligprint/romaneio/ImpresDESINST.php">
                     <input type="submit" id="inserir" class="btn btn-outline-secondary" value="DESINSTALAÇÃO"></input>
                   </form>
+                  <form class="form-btn" action="http://localhost:8090/phpprod/ligprint/romaneio/Impres_SUBS.php">
+                    <input type="submit" id="inserir" class="btn btn-outline-secondary" value="INSTALAÇÃO/SUBS"></input>
+                  </form>
+                  <form class="form-btn" action="http://localhost:8090/phpprod/ligprint/romaneio/.php">
+                    <input type="submit" id="inserir" class="btn btn-outline-secondary" value="DESINSTALAÇÃO/SUBS"></input>
+                  </form>
                 </div>
             </main>
           </div>

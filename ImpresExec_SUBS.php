@@ -34,11 +34,11 @@
     <title>APNET</title>
   </head>
 <body>
-  <a href="http://localhost:8090/phpprod/ligprint/romaneio/impres.php">
+  <a href="http://localhost:8090/phpprod/ligprint/romaneio/impres_SUBS.php">
     <img src="media/logo.png" width="100px" height="24px" alt="Logo">
   </a>
   <div class="nome-doc">
-    <div class='titulo-cab'><b>TERMO DE INSTALAÇÃO DE EQUIPAMENTO</b></div>
+    <div class='titulo-cab'><b>TERMO DE SUBSTITUIÇÃO DE EQUIPAMENTO</b></div>
  </div>
 
 <div class="cabeçalho">
@@ -103,9 +103,11 @@
                             $row[NomeCli], com inscrição no CNPJ nº $row[CNPJCli], IE nº $row[InscricaoEstCli],
                             localizado na $row[RuaCli], $row[NumCli], bairro $row[BairroCli], CEP $row[CEPCli], na cidade de
                             $row[CidadeUFCli], declara ter recebido o Equipamento Enviado, denominado Impressora, em perfeito
-                            estado de conservação e funcionamento, conforme teste realizado, e que haverá zelo pela integridade física
-                            do equipamento de propriedade de $row[NomeEmp], equipamento este que
-                            será destinado ao atendimento do Contrato de Locação de Bens Móveis número: $row[Contrato].
+                            estado de conservação e funcionamento, com relatório de paginas impressas, informando a quantidade de
+                            páginas impressas supra citada, conforme teste realizado, e que haverá zelo pela integridade física do
+                            equipamento, equipamento este que será destinado ao atendimento do Contrato de Locação de Bens
+                            Móveis número: $row[Contrato]. Assumindo ainda, a responsabilidade legal da condição de fiel depositário, pelo
+                            zelo e pela integridade física do equipamento de propriedade de $row[NomeEmp].
                         </td>";
             $tabela .= "</tr>";
 
@@ -286,10 +288,12 @@
           <tr>
             <td>Nome: _______________________________</td>
           </tr>
+          <tr><td> </td></tr>
+          <tr><td> </td></tr>
+          <tr><td> </td></tr>
           <tr>
             <td>CPF: ________________________________</td>
           </tr>
-          
         </tbody>
       </table>
 
@@ -303,10 +307,12 @@
           <tr>
             <td>Nome: _______________________________</td>
           </tr>
+          <tr><td> </td></tr>
+          <tr><td> </td></tr>
+          <tr><td> </td></tr>
           <tr>
             <td>CPF: ________________________________</td>
           </tr>
-          
         </tbody>
       </table>
   </div> 

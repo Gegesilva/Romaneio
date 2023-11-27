@@ -65,7 +65,7 @@ body{
               <a class="navbar-brand mx-auto" href="#"> <b>TERMO DE INSTALAÇÃO</b>
                     
                     <div class="divBtn">
-                    <form method="post" action="http://localhost:8090/phpprod/ligprint/romaneio/ImpresExec.php">
+                    <form method="post" action="http://localhost:8090/phpprod/ligprint/romaneio/ImpresExec_SUBS.php">
 
                         <input class="inputcod" type="text" name="cod" autofocus="true">
                          <input class="btnInserir" type="submit" value="Gerar">

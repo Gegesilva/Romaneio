@@ -141,3 +141,7 @@ body{
    .titulo-cab{
       color: blue;
    }
+
+   .btn{
+      text-align: center;
+   }

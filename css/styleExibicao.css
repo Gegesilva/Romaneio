@@ -1,7 +1,7 @@
-/* body{
+body{
     background-image: url(https://i.ibb.co/0VZRMHx/databitoriginal-escura.jpg);
-    background-repeat: no-repeat;
-  } */
+    /* background-repeat: no-repeat; */
+  }
 
   .btn {
     width: 180px !important;
