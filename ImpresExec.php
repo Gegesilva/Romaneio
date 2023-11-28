@@ -3,8 +3,6 @@
   $cod = $_POST['cod'];
   include_once("conexaoSQL.php");
 ?>
-
-
 <!doctype html>
 <html lang="pt-BR">
   <head>
@@ -27,8 +25,6 @@
             window.onload = function () {
             JsBarcode(".barcode").init();
           }
-
-
         </script>
 
     <title>APNET</title>

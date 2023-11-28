@@ -15,7 +15,7 @@
     <link href="css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styleExibicao.css">
 
-    <title>APNET</title>
+    <title>DATABIT</title>
   </head>
 
 <style>

@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-    <title>APNET</title>
+    <title>DATABIT</title>
   </head>
 <body>
   <a href="http://localhost:8090/phpprod/ligprint/romaneio/impresDESINST.php">
