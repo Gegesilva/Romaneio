@@ -62,10 +62,10 @@ body{
           </div>
             <img src="media/logo.png" width="115" height="34" style="margin-left: 10px; border-radius: 20px;"  class="d-inline-block align-top" alt="">
           <div class="mx-auto order-0">
-              <a class="navbar-brand mx-auto" href="#"> <b>TERMO DE INSTALAÇÃO/SUBS</b>
+              <a class="navbar-brand mx-auto" href="#"> <b>TERMO DE DESINSTALAÇÃO/SUBS</b>
                     
-                    <div class="divBtn">
-                    <form method="post" action="http://localhost:8090/phpprod/ligprint/romaneio/ImpresExec_SUBS.php">
+                  <div class="divBtn">
+                    <form method="post" action="http://localhost:8090/phpprod/ligprint/romaneio/impresDESINST_SUBS.php">
 
                         <input class="inputcod" type="text" name="cod" autofocus="true">
                          <input class="btnInserir" type="submit" value="Gerar">
@@ -76,7 +76,6 @@ body{
                       </form>
                     </div>  
               </a>
-        
           </div>
           <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         </div>
