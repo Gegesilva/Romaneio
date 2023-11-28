@@ -94,8 +94,6 @@
                             equipamento, equipamento este que será destinado ao atendimento do Contrato de Locação de Bens
                             Móveis número: $row[Contrato]. Assumindo ainda, a responsabilidade legal da condição de fiel depositário, pelo
                             zelo e pela integridade física do equipamento de propriedade de $row[NomeEmp].
-                            LTDA.
-
                         </td>";
             $tabela .= "</tr>";
 
