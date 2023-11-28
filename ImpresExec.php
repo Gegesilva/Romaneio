@@ -234,10 +234,10 @@
                                 
                               while ($row1 = sqlsrv_fetch_array($stmt1, SQLSRV_FETCH_ASSOC))
                               {
-                                    $franquia = "Franquia: ".$row1['Franquia'];
+                                    $franquia = $row1['Franquia']." ";
                                     $paginas = $row1['Paginas']." Páginas ";
-                                    $vlrPaginas = "Valor: ".$row1['valor'];
-                                    $excedente = " Adicional: ".$row1['valor']." por página excedente";
+                                    $vlrPaginas = $row1['Franquia']." " .$row1['valor'];
+                                    $excedente = $row1['Franquia']." " .$row1['valor']." por página excedente";
 
 
                                     if($row1['TipoCobertura'] == 'N' && $row1['TipoCobertura'] >= 0 && $row1['TipoRateio'] != 4){
@@ -325,12 +325,12 @@
             Solicito o desconto de ________ página(s) impressa(s) utilizadas para teste.
           </p>
         </div>
-          <div class="table-assin2">                            
-              <div>_________________________________________</br><b class="assin">Cliente</b></div>
-                &nbsp;
-              <div>_________________________________________</br><b class="assin">Técnico Responsável</b></div>
-                &nbsp;
-          </div> 
+        <div class="table-assin2">                            
+            <div>_________________________________________</br><b class="assin">Cliente</b></div>
+              &nbsp;
+            <div>_________________________________________</br><b class="assin">Técnico Responsável</b></div>
+              &nbsp;
+        </div> 
   </div> 
 </div>
 </body>

@@ -65,7 +65,7 @@ body{
               <a class="navbar-brand mx-auto" href="#"> <b>TERMO DE DESINSTALAÇÃO/SUBS</b>
                     
                   <div class="divBtn">
-                    <form method="post" action="http://localhost:8090/phpprod/ligprint/romaneio/impresDESINST_SUBS.php">
+                    <form method="post" action="http://localhost:8090/phpprod/ligprint/romaneio/impresExecDESINST_SUBS.php">
 
                         <input class="inputcod" type="text" name="cod" autofocus="true">
                          <input class="btnInserir" type="submit" value="Gerar">

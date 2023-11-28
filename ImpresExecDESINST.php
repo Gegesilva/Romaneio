@@ -225,24 +225,24 @@
                                 
                               while ($row1 = sqlsrv_fetch_array($stmt1, SQLSRV_FETCH_ASSOC))
                               {
-                                    $franquia = "Franquia: ".$row1['Franquia'];
-                                    $paginas = $row1['Paginas']." Páginas ";
-                                    $vlrPaginas = "Valor: ".$row1['valor'];
-                                    $excedente = " Adicional: ".$row1['valor']." por página excedente";
+                                $franquia = $row1['Franquia']." ";
+                                $paginas = $row1['Paginas']." Páginas ";
+                                $vlrPaginas = $row1['Franquia']." " .$row1['valor'];
+                                $excedente = $row1['Franquia']." " .$row1['valor']." por página excedente";
 
 
-                                    if($row1['TipoCobertura'] == 'N' && $row1['TipoCobertura'] >= 0 && $row1['TipoRateio'] != 4){
-                                      $textoMedidor = $franquia." ".$paginas;
+                                if($row1['TipoCobertura'] == 'N' && $row1['TipoCobertura'] >= 0 && $row1['TipoRateio'] != 4){
+                                  $textoMedidor = $franquia." ".$paginas;
+                                }
+                                  elseif($row1['TipoCobertura'] == 'E'){
+                                    $textoMedidor = $excedente;
+                                  }
+                                    elseif($row1['TipoCobertura'] == 'S'){
+                                      $textoMedidor = $vlrPaginas." por página.";
                                     }
-                                      elseif($row1['TipoCobertura'] == 'E'){
-                                        $textoMedidor = $excedente;
+                                      elseif($row1['TipoCobertura'] == 'N' && $row1['TipoRateio'] == 4){
+                                          $textoMedidor = $vlrPaginas;
                                       }
-                                        elseif($row1['TipoCobertura'] == 'S'){
-                                          $textoMedidor = $vlrPaginas." por página.";
-                                        }
-                                          elseif($row1['TipoCobertura'] == 'N' && $row1['TipoRateio'] == 4){
-                                              $textoMedidor = $vlrPaginas;
-                                          }
 
 
                                     $tabela .= "<tr>";
