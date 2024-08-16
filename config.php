@@ -1,7 +1,5 @@
 <?php
-$url = 'http://localhost:8090/phpprod/ttg/coletorconferencia';
-
-$server = 'localhost';
+$server = '192.168.254.198';
 $base = 'LIGPRINT';
-$usuarioBanco = 'sa';
-$SenhaBanco = 'databit@2022';
+$usuarioBanco = 'ligprint';
+$SenhaBanco = 'ligprint@2023';
