@@ -38,7 +38,7 @@
     <img src="media/logo.png" width="100px" height="24px" alt="Logo">
   </a>
   <div class="nome-doc">
-    <div class='titulo-cab'><b>TERMO DE SUBSTITUIÇÃO DE EQUIPAMENTO</b></div>
+    <div class='titulo-cab'><b>TERMO DE SUBSTITUIÇÃO DE EQUIPAMENTO - REMESSA</b></div>
  </div>
 
 <div class="cabeçalho">
