@@ -34,7 +34,7 @@
     <title>DATABIT</title>
   </head>
 <body>
-  <a href="http://localhost:8090/phpprod/ligprint/romaneio/impres_SUBS.php">
+  <a href="http://localhost:8090/romaneio/impres_SUBS.php">
     <img src="media/logo.png" width="100px" height="24px" alt="Logo">
   </a>
   <div class="nome-doc">
@@ -45,7 +45,7 @@
 
     <?php
         $sql = "
-              SELECT 
+              SELECT DISTINCT
                   --EMPRESA
                   TB02021_CODIGO Venda,
                   TB01007_NOME NomeEmp,
@@ -80,8 +80,8 @@
               LEFT JOIN TB02176 ON TB02176_CODIGO = TB02021_CODSITE 
               LEFT JOIN TB02185 ON TB02185_CONTRATO = TB02111_CODIGO
               WHERE 
-                --TB02021_OPERACAO = '02'
-                TB02021_CODIGO = '$cod'
+                TB02021_TIPODESC = '13'
+                AND TB02021_CODIGO = '$cod'
           
         ";
       $stmt = sqlsrv_query($conn, $sql);
@@ -122,15 +122,22 @@
   <div class="dadosprod">
    <?php
         $sql = " 
-            SELECT DISTINCT
+        SELECT DISTINCT
               TB02055_NUMSERIE NumSerie,
               TB02021_CODIGO Venda,
               TB01010_NOME Equipamento,
-              TB02054_PAT Patrimonio,
+              TB02112_PAT Patrimonio,
               TB02176_END EndEquip,
               TB02022_PRODUTO Produto,
-              COALESCE((SELECT TOP 1 TB02115_CONTPB FROM TB02115 WHERE TB02115_CONTRATO = TB02111_CODIGO AND TB02115_PRODUTO = TB02022_PRODUTO AND TB02115_NUMSERIE = TB02055_NUMSERIE AND TB02115_CODCLI = '00000000' ORDER BY TB02115_DATA DESC),
-	            TB02054_MEDIDORPB) LeituraInicial,
+              COALESCE(
+                (SELECT TOP 1 
+                  TB02122_CONTADOR 
+                FROM 
+                  TB02122 
+                WHERE TB02122_PRODUTO = TB02022_PRODUTO 
+                AND TB02122_NUMSERIE = TB02055_NUMSERIE 
+                ORDER BY TB02122_DATA DESC),
+              TB02054_MEDIDORPB) LeituraInicial,
               TB02111_CODIGO Contrato
             
             
@@ -144,10 +151,11 @@
             LEFT JOIN TB01010 ON TB01010_CODIGO = TB02022_PRODUTO
             LEFT JOIN TB02055 ON TB02055_PRODUTO = TB02022_PRODUTO AND TB02022_CODIGO = TB02055_CODIGO AND TB02055_OPERACAO = 'S' --AND TB02055_NUMSERIE = TB02112_NUMSERIE
             LEFT JOIN TB02176 ON TB02176_CODIGO = TB02021_CODSITE 
-            LEFT JOIN TB02054 ON TB02054_PRODUTO = TB02022_PRODUTO AND TB02054_NUMSERIE = TB02022_NUMSERIE
+            LEFT JOIN TB02054 ON TB02054_PRODUTO = TB02022_PRODUTO AND TB02054_NUMSERIE = TB02055_NUMSERIE
+            LEFT JOIN TB02112 ON TB02112_PRODUTO = TB02055_PRODUTO AND TB02112_NUMSERIE = TB02055_NUMSERIE AND TB02112_CODIGO = TB02111_CODIGO
             WHERE 
-            --TB02021_OPERACAO = '02'
-            TB02021_CODIGO = '$cod' 
+            TB02021_TIPODESC = '13'
+            AND TB02021_CODIGO = '$cod' 
         ";
       $stmt = sqlsrv_query($conn, $sql);
         
@@ -190,20 +198,30 @@
                                             TB02055_PAT Patrimonio,
                                             TB02055_NUMSERIE NumSerie,
                                             TB02176_END EndEquip,
-                                            
-                                          
-                                            CASE
-                                              WHEN TB02111_ANALFRANQUIA = 'T' THEN TB02111_FRANQPB
-                                              WHEN TB02111_ANALFRANQUIA = 'M' THEN TB02112_FRANQPB
-                                              WHEN TB02111_ANALFRANQUIA = 'G' THEN TB02185_FRANQPB
+                                            CASE 
+                                                WHEN TB01049_VARIAVEL = 'N'
+                                                THEN 
+                                                  CASE WHEN TB01049_TIPORATEIO = 0 THEN TB02111_FRANQPB
+                                                    WHEN TB01049_TIPORATEIO = 1 THEN TB02111_FRANQCOLOR
+                                                    WHEN TB01049_TIPORATEIO = 2 THEN TB02111_FRANQDG
+                                                    WHEN TB01049_TIPORATEIO = 3 THEN TB02111_FRANQGF
+                                                    WHEN TB01049_TIPORATEIO = 5 THEN TB02111_FRANQGFC
+                                                  END 
+                                                  WHEN (TB01049_VARIAVEL = 'S' OR TB01049_VARIAVEL = 'E')
+                                                THEN 
+                                                  CASE WHEN TB01049_TIPOVARIAVEL = 0 THEN TB02111_FRANQPB
+                                                    WHEN TB01049_TIPOVARIAVEL = 1 THEN TB02111_FRANQCOLOR
+                                                    WHEN TB01049_TIPOVARIAVEL = 2 THEN TB02111_FRANQDG
+                                                    WHEN TB01049_TIPOVARIAVEL = 3 THEN TB02111_FRANQGF
+                                                    WHEN TB01049_TIPOVARIAVEL = 4 THEN TB02111_FRANQGFC
+                                                  END 
                                               END Paginas,
-                                          
-                                          
-                                                CASE
-                                                WHEN TB02111_ANALFRANQUIA = 'T' THEN TB02113_VALOR
-                                                WHEN TB02111_ANALFRANQUIA = 'M' THEN TB02113_VALOR
-                                                WHEN TB02111_ANALFRANQUIA = 'G' THEN TB02186_VALOR
-                                                END valor,
+                                            FORMAT(
+                                                    CASE
+                                                    WHEN TB02111_ANALFRANQUIA = 'T' THEN TB02113_VALOR
+                                                    WHEN TB02111_ANALFRANQUIA = 'M' THEN TB02113_VALOR
+                                                    WHEN TB02111_ANALFRANQUIA = 'G' THEN TB02186_VALOR
+                                                    END, 'C', 'pt-br') valor,
                                           
                                           
                                                 TB02113_VALOR Excedente,
@@ -231,8 +249,8 @@
                                           LEFT JOIN TB02185 ON TB02185_CONTRATO = TB02111_CODIGO
                                           LEFT JOIN TB02186 ON TB02186_GRUPO = TB02112_GRUPO
                                           WHERE 
-                                            -- --TB02021_OPERACAO = '02'
-                                            TB02055_NUMSERIE = '$row[NumSerie]'
+                                            TB02021_TIPODESC = '13'
+                                            AND TB02055_NUMSERIE = '$row[NumSerie]'
                                             AND TB02021_CODIGO = '$row[Venda]'
                                             AND TB02111_CODIGO = '$row[Contrato]'
                                   ";
@@ -244,10 +262,11 @@
                                 $paginas = $row1['Paginas']." Páginas ";
                                 $vlrPaginas = $row1['Franquia']." " .$row1['valor'];
                                 $excedente = $row1['Franquia']." " .$row1['valor']." por página excedente";
+                                $valor = $row1['valor'];
 
 
-                                if($row1['TipoCobertura'] == 'N' && $row1['TipoCobertura'] >= 0 && $row1['TipoRateio'] != 4){
-                                  $textoMedidor = $franquia." ".$paginas;
+                                if($row1['TipoCobertura'] == 'N' && $row1['TipoRateio'] != 4){
+                                  $textoMedidor = $franquia." ".$paginas."Valor: ".$valor;
                                 }
                                   elseif($row1['TipoCobertura'] == 'E'){
                                     $textoMedidor = $excedente;
@@ -272,7 +291,7 @@
   </div>
   
   <div class="info-central">
-    <div class='info'><?php echo $cidade;?>, <?php echo date('d/m/Y H:i:s'); ?></div>
+    <div class='info'><?php echo $cidade;?>, <?php echo date('d/m/Y'); ?></div>
   </div>
 
 <hr> <!-- LINHA CENTRAL -->

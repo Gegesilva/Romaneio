@@ -82,16 +82,16 @@
           <div style="height: 30px; line-height: 10px; font-size: 8px;">&nbsp;</div>
             <main role="main" class="inner cover">
                 <div class="divBtn">
-                  <form class="form-btn" action="http://localhost:8090/phpprod/ligprint/romaneio/Impres.php">
+                  <form class="form-btn" action="http://localhost:8090/romaneio/Impres.php">
                     <input type="submit" id="deletar"  class="btn btn-outline-secondary" value="INSTALAÇÃO"></input>
                   </form>
-                  <form class="form-btn" action="http://localhost:8090/phpprod/ligprint/romaneio/ImpresDESINST.php">
+                  <form class="form-btn" action="http://localhost:8090/romaneio/ImpresDESINST.php">
                     <input type="submit" id="inserir" class="btn btn-outline-secondary" value="DESINSTALAÇÃO"></input>
                   </form>
-                  <form class="form-btn" action="http://localhost:8090/phpprod/ligprint/romaneio/Impres_SUBS.php">
+                  <form class="form-btn" action="http://localhost:8090/romaneio/Impres_SUBS.php">
                     <input type="submit" id="inserir" class="btn btn-outline-secondary" value="INSTALAÇÃO/SUBS"></input>
                   </form>
-                  <form class="form-btn" action="http://localhost:8090/phpprod/ligprint/romaneio/impresDESINST_SUBS.php">
+                  <form class="form-btn" action="http://localhost:8090/romaneio/impresDESINST_SUBS.php">
                     <input type="submit" id="inserir" class="btn btn-outline-secondary" value="DESINSTALAÇÃO/SUBS"></input>
                   </form>
                 </div>
