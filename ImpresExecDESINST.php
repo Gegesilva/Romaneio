@@ -19,7 +19,7 @@
     <title>DATABIT</title>
   </head>
 <body>
-  <a href="http://localhost:8090/romaneio/impresDESINST.php">
+  <a href="impresDESINST.php">
     <img src="media/logo.png" width="100px" height="24px" alt="Logo">
   </a>
   <div class="nome-doc">

@@ -1,45 +1,5 @@
 <?php
   header('Content-type: text/html; charset=utf-8');
- 
-   /* VALIDA USUARIO */
-  /*  session_start();
-   include "conexaoSQL.php";
-   $login = $_SESSION["login"];
-   $senha = $_SESSION["password"];
-
-      $sql="
-            SELECT 
-              TB01066_USUARIO Usuario,
-              TB01066_SENHA Senha,
-
-              TB01066_GRAFICOS permGrafOs,
-              TB01066_GRAFICOS2 permGrafReq,
-              TB01066_USUARIOS permUsu,
-              TB01066_CHAT permChat
-            FROM 
-              TB01066
-            WHERE 
-              TB01066_USUARIO = '$login'
-              AND TB01066_SENHA = '$senha'
-       ";
-     $stmt= sqlsrv_query($conn,$sql);
-     while($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)){
-       $usuario = $row['Usuario'];
-       $senha = $row['Senha'];
-
-       $permGrafOs = $row['permGrafOs'];
-       $permGrafReq = $row['permGrafReq'];
-       $permUsu = $row['permUsu'];
-       $permChat = $row['permChat'];
-     }
-     if($usuario != NULL){
- 
-     }else { 
-       echo"<script>window.alert('É necessário fazer login!')</script>";
-       echo "<script>location.href='http://localhost:8090/phpprod/positiva/coletores/coletorexpedicao/coletores/login.php'</script>";
-       
-     }  */
-
 
   $AlterlocTotal = '<input type="submit" id="deletar"  class="btn btn-outline-secondary" value="ALTER TOTAL"></input>';
   $AlterLocUni = '<input type="submit" id="inserir" class="btn btn-outline-secondary" value="ALTER UNICO"></input>';
@@ -82,16 +42,16 @@
           <div style="height: 30px; line-height: 10px; font-size: 8px;">&nbsp;</div>
             <main role="main" class="inner cover">
                 <div class="divBtn">
-                  <form class="form-btn" action="http://localhost:8090/romaneio/Impres.php">
+                  <form class="form-btn" action="Impres.php">
                     <input type="submit" id="deletar"  class="btn btn-outline-secondary" value="INSTALAÇÃO"></input>
                   </form>
-                  <form class="form-btn" action="http://localhost:8090/romaneio/ImpresDESINST.php">
+                  <form class="form-btn" action="ImpresDESINST.php">
                     <input type="submit" id="inserir" class="btn btn-outline-secondary" value="DESINSTALAÇÃO"></input>
                   </form>
-                  <form class="form-btn" action="http://localhost:8090/romaneio/Impres_SUBS.php">
+                  <form class="form-btn" action="Impres_SUBS.php">
                     <input type="submit" id="inserir" class="btn btn-outline-secondary" value="INSTALAÇÃO/SUBS"></input>
                   </form>
-                  <form class="form-btn" action="http://localhost:8090/romaneio/impresDESINST_SUBS.php">
+                  <form class="form-btn" action="impresDESINST_SUBS.php">
                     <input type="submit" id="inserir" class="btn btn-outline-secondary" value="DESINSTALAÇÃO/SUBS"></input>
                   </form>
                 </div>

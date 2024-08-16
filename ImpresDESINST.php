@@ -65,13 +65,13 @@ body{
               <a class="navbar-brand mx-auto" href="#"> <b>TERMO DE DESINSTALAÇÃO</b>
                     
                   <div class="divBtn">
-                    <form method="post" action="http://localhost:8090/romaneio/ImpresExecDESINST.php">
+                    <form method="post" action="ImpresExecDESINST.php">
 
                         <input class="inputcod" type="text" name="cod" autofocus="true">
                          <input class="btnInserir" type="submit" value="Gerar">
                         <!-- <button id="btn">Imprimir</button> -->
                       </form>
-                      <form action="http://localhost:8090/romaneio/gerencial.php">
+                      <form action="gerencial.php">
                         <input class="voltar-fil" type="submit" value="Voltar">
                       </form>
                     </div>  

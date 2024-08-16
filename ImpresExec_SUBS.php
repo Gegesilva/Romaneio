@@ -34,7 +34,7 @@
     <title>DATABIT</title>
   </head>
 <body>
-  <a href="http://localhost:8090/romaneio/impres_SUBS.php">
+  <a href="impres_SUBS.php">
     <img src="media/logo.png" width="100px" height="24px" alt="Logo">
   </a>
   <div class="nome-doc">
