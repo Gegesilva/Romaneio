@@ -46,8 +46,7 @@ include_once("conexaoSQL.php");
   <div class="cabeçalho">
 
     <?php
-    $sql = "
-              SELECT DISTINCT
+    $sql = "SELECT DISTINCT
                   --EMPRESA
                   TB02021_CODIGO Venda,
                   TB01007_NOME NomeEmp,
@@ -121,41 +120,40 @@ include_once("conexaoSQL.php");
   <div class="meio">
     <div class="dadosprod">
       <?php
-      $sql = " 
-        SELECT DISTINCT
-              TB02055_NUMSERIE NumSerie,
-              TB02021_CODIGO Venda,
-              TB01010_NOME Equipamento,
-              TB02112_PAT Patrimonio,
-              CONCAT(TB02176_END, ' - ', TB02176_NUM, ' - ', TB02176_BAIRRO, ' - ', TB02176_CIDADE, ' - ', TB02176_ESTADO) EndEquip,
-              TB02022_PRODUTO Produto,
-              COALESCE(
-                (SELECT TOP 1 
-                  TB02122_CONTADOR 
-                FROM 
-                  TB02122 
-                WHERE TB02122_PRODUTO = TB02022_PRODUTO 
-                AND TB02122_NUMSERIE = TB02055_NUMSERIE 
-                ORDER BY TB02122_DATA DESC),
-              TB02054_MEDIDORPB) LeituraInicial,
-              TB02111_CODIGO Contrato
-            
-            
-            FROM TB02021
-            LEFT JOIN TB02022 ON TB02022_CODIGO = TB02021_CODIGO 
-            LEFT JOIN TB01007 ON TB01007_CODIGO = TB02021_CODEMP
-            LEFT JOIN TB01008 ON TB01008_CODIGO = TB02021_CODCLI
-            LEFT JOIN TB00012 EMP ON EMP.TB00012_CODIGO = TB02021_CODEMP AND EMP.TB00012_TABELA = 'TB01007' AND EMP.TB00012_TIPO = '01'
-            LEFT JOIN TB00012 CLI ON CLI.TB00012_CODIGO = TB02021_CODCLI AND CLI.TB00012_TABELA = 'TB01008' AND CLI.TB00012_TIPO = '01'
-            LEFT JOIN TB02111 ON TB02111_CODIGO = TB02021_CONTRATO
-            LEFT JOIN TB01010 ON TB01010_CODIGO = TB02022_PRODUTO
-            LEFT JOIN TB02055 ON TB02055_PRODUTO = TB02022_PRODUTO AND TB02022_CODIGO = TB02055_CODIGO AND TB02055_OPERACAO = 'S' --AND TB02055_NUMSERIE = TB02112_NUMSERIE
-            LEFT JOIN TB02176 ON TB02176_CODIGO = TB02021_CODSITE 
-            LEFT JOIN TB02054 ON TB02054_PRODUTO = TB02022_PRODUTO AND TB02054_NUMSERIE = TB02055_NUMSERIE
-            LEFT JOIN TB02112 ON TB02112_PRODUTO = TB02055_PRODUTO AND TB02112_NUMSERIE = TB02055_NUMSERIE AND TB02112_CODIGO = TB02111_CODIGO
-            WHERE 
-            TB02021_TIPODESC = '13'
-            AND TB02021_CODIGO = '$cod' 
+      $sql = "  SELECT DISTINCT
+                    TB02055_NUMSERIE NumSerie,
+                    TB02021_CODIGO Venda,
+                    TB01010_NOME Equipamento,
+                    TB02112_PAT Patrimonio,
+                    CONCAT(TB02176_END, ' - ', TB02176_NUM, ' - ', TB02176_BAIRRO, ' - ', TB02176_CIDADE, ' - ', TB02176_ESTADO) EndEquip,
+                    TB02022_PRODUTO Produto,
+                    COALESCE(
+                      (SELECT TOP 1 
+                        TB02122_CONTADOR 
+                      FROM 
+                        TB02122 
+                      WHERE TB02122_PRODUTO = TB02022_PRODUTO 
+                      AND TB02122_NUMSERIE = TB02055_NUMSERIE 
+                      ORDER BY TB02122_DATA DESC),
+                    TB02054_MEDIDORPB) LeituraInicial,
+                    TB02111_CODIGO Contrato
+                  
+                  
+                  FROM TB02021
+                  LEFT JOIN TB02022 ON TB02022_CODIGO = TB02021_CODIGO 
+                  LEFT JOIN TB01007 ON TB01007_CODIGO = TB02021_CODEMP
+                  LEFT JOIN TB01008 ON TB01008_CODIGO = TB02021_CODCLI
+                  LEFT JOIN TB00012 EMP ON EMP.TB00012_CODIGO = TB02021_CODEMP AND EMP.TB00012_TABELA = 'TB01007' AND EMP.TB00012_TIPO = '01'
+                  LEFT JOIN TB00012 CLI ON CLI.TB00012_CODIGO = TB02021_CODCLI AND CLI.TB00012_TABELA = 'TB01008' AND CLI.TB00012_TIPO = '01'
+                  LEFT JOIN TB02111 ON TB02111_CODIGO = TB02021_CONTRATO
+                  LEFT JOIN TB01010 ON TB01010_CODIGO = TB02022_PRODUTO
+                  LEFT JOIN TB02055 ON TB02055_PRODUTO = TB02022_PRODUTO AND TB02022_CODIGO = TB02055_CODIGO AND TB02055_OPERACAO = 'S' --AND TB02055_NUMSERIE = TB02112_NUMSERIE
+                  LEFT JOIN TB02176 ON TB02176_CODIGO = TB02021_CODSITE 
+                  LEFT JOIN TB02054 ON TB02054_PRODUTO = TB02022_PRODUTO AND TB02054_NUMSERIE = TB02055_NUMSERIE
+                  LEFT JOIN TB02112 ON TB02112_PRODUTO = TB02055_PRODUTO AND TB02112_NUMSERIE = TB02055_NUMSERIE AND TB02112_CODIGO = TB02111_CODIGO
+              WHERE 
+              TB02021_TIPODESC = '13'
+              AND TB02021_CODIGO = '$cod' 
         ";
       $stmt = sqlsrv_query($conn, $sql);
 
@@ -187,70 +185,69 @@ include_once("conexaoSQL.php");
           $tabela .= "<tr>";
           $tabela .= "<td width = '60%;'><b>Medidor </b></td>";
           $tabela .= "</tr>";
-          $sql1 = " 
-                                      SELECT DISTINCT
-                                              --EMPRESA
-                                            TB02021_CODIGO Venda,
-                                            TB02111_CODIGO Contrato,
-                                            TB01010_NOME Equipamento,
-                                            TB02055_PAT Patrimonio,
-                                            TB02055_NUMSERIE NumSerie,
-                                            TB02176_END EndEquip,
-                                            CASE 
-                                                WHEN TB01049_VARIAVEL = 'N'
-                                                THEN 
-                                                  CASE WHEN TB01049_TIPORATEIO = 0 THEN TB02111_FRANQPB
-                                                    WHEN TB01049_TIPORATEIO = 1 THEN TB02111_FRANQCOLOR
-                                                    WHEN TB01049_TIPORATEIO = 2 THEN TB02111_FRANQDG
-                                                    WHEN TB01049_TIPORATEIO = 3 THEN TB02111_FRANQGF
-                                                    WHEN TB01049_TIPORATEIO = 5 THEN TB02111_FRANQGFC
-                                                  END 
-                                                  WHEN (TB01049_VARIAVEL = 'S' OR TB01049_VARIAVEL = 'E')
-                                                THEN 
-                                                  CASE WHEN TB01049_TIPOVARIAVEL = 0 THEN TB02111_FRANQPB
-                                                    WHEN TB01049_TIPOVARIAVEL = 1 THEN TB02111_FRANQCOLOR
-                                                    WHEN TB01049_TIPOVARIAVEL = 2 THEN TB02111_FRANQDG
-                                                    WHEN TB01049_TIPOVARIAVEL = 3 THEN TB02111_FRANQGF
-                                                    WHEN TB01049_TIPOVARIAVEL = 4 THEN TB02111_FRANQGFC
-                                                  END 
-                                              END Paginas,
-                                            FORMAT(
-                                                    CASE
-                                                    WHEN TB02111_ANALFRANQUIA = 'T' THEN TB02113_VALOR
-                                                    WHEN TB02111_ANALFRANQUIA = 'M' THEN TB02113_VALOR
-                                                    WHEN TB02111_ANALFRANQUIA = 'G' THEN TB02186_VALOR
-                                                    END, 'C', 'pt-br') valor,
-                                          
-                                          
-                                                TB02113_VALOR Excedente,
-                                          
-                                            TB01049_NOME Franquia,
-                                            TB01049_VARIAVEL TipoCobertura,
-                                            TB01049_TIPORATEIO TipoRateio
-                                          
-                                          
-                                          FROM TB02021
-                                          LEFT JOIN TB02022 ON TB02022_CODIGO = TB02021_CODIGO 
-                                          LEFT JOIN TB01007 ON TB01007_CODIGO = TB02021_CODEMP
-                                          LEFT JOIN TB01008 ON TB01008_CODIGO = TB02021_CODCLI
-                                          LEFT JOIN TB00012 EMP ON EMP.TB00012_CODIGO = TB02021_CODEMP AND EMP.TB00012_TABELA = 'TB01007' AND EMP.TB00012_TIPO = '01'
-                                          LEFT JOIN TB00012 CLI ON CLI.TB00012_CODIGO = TB02021_CODCLI AND CLI.TB00012_TABELA = 'TB01008' AND CLI.TB00012_TIPO = '01'
-                                          LEFT JOIN TB02111 ON TB02111_CODIGO = TB02021_CONTRATO
-                                          LEFT JOIN TB02112 ON TB02112_CODIGO = TB02111_CODIGO AND TB02112_PRODUTO = TB02022_PRODUTO
-                                          LEFT JOIN TB01010 ON TB01010_CODIGO = TB02022_PRODUTO
-                                          LEFT JOIN TB02055 ON TB02055_PRODUTO = TB02022_PRODUTO AND TB02022_CODIGO = TB02055_CODIGO AND TB02055_OPERACAO = 'S' AND TB02055_NUMSERIE = TB02112_NUMSERIE
-                                          LEFT JOIN TB02176 ON TB02176_CODIGO = TB02021_CODSITE 
-                                          LEFT JOIN TB02054 ON TB02054_PRODUTO = TB02112_PRODUTO AND TB02054_NUMSERIE = TB02112_NUMSERIE
-                                          LEFT JOIN TB02115 ON TB02115_CONTRATO = TB02021_CONTRATO AND TB02115_PRODUTO = TB02022_PRODUTO AND TB02115_NUMSERIE = TB02112_NUMSERIE
-                                          LEFT JOIN TB02113 ON TB02113_PRODUTO = TB02112_PRODUTO AND TB02113_NUMSERIE = TB02112_NUMSERIE AND TB02113_CODIGO = TB02112_CODIGO
-                                          LEFT JOIN TB01049 ON TB01049_CODIGO = TB02113_COBERTURA
-                                          LEFT JOIN TB02185 ON TB02185_CONTRATO = TB02111_CODIGO
-                                          LEFT JOIN TB02186 ON TB02186_GRUPO = TB02112_GRUPO
-                                          WHERE 
-                                            TB02021_TIPODESC = '13'
-                                            AND TB02055_NUMSERIE = '$row[NumSerie]'
-                                            AND TB02021_CODIGO = '$row[Venda]'
-                                            AND TB02111_CODIGO = '$row[Contrato]'
+          $sql1 = "  SELECT DISTINCT
+                            --EMPRESA
+                          TB02021_CODIGO Venda,
+                          TB02111_CODIGO Contrato,
+                          TB01010_NOME Equipamento,
+                          TB02055_PAT Patrimonio,
+                          TB02055_NUMSERIE NumSerie,
+                          TB02176_END EndEquip,
+                          CASE 
+                              WHEN TB01049_VARIAVEL = 'N'
+                              THEN 
+                                CASE WHEN TB01049_TIPORATEIO = 0 THEN TB02111_FRANQPB
+                                  WHEN TB01049_TIPORATEIO = 1 THEN TB02111_FRANQCOLOR
+                                  WHEN TB01049_TIPORATEIO = 2 THEN TB02111_FRANQDG
+                                  WHEN TB01049_TIPORATEIO = 3 THEN TB02111_FRANQGF
+                                  WHEN TB01049_TIPORATEIO = 5 THEN TB02111_FRANQGFC
+                                END 
+                                WHEN (TB01049_VARIAVEL = 'S' OR TB01049_VARIAVEL = 'E')
+                              THEN 
+                                CASE WHEN TB01049_TIPOVARIAVEL = 0 THEN TB02111_FRANQPB
+                                  WHEN TB01049_TIPOVARIAVEL = 1 THEN TB02111_FRANQCOLOR
+                                  WHEN TB01049_TIPOVARIAVEL = 2 THEN TB02111_FRANQDG
+                                  WHEN TB01049_TIPOVARIAVEL = 3 THEN TB02111_FRANQGF
+                                  WHEN TB01049_TIPOVARIAVEL = 4 THEN TB02111_FRANQGFC
+                                END 
+                            END Paginas,
+                          FORMAT(
+                                  CASE
+                                  WHEN TB02111_ANALFRANQUIA = 'T' THEN TB02113_VALOR
+                                  WHEN TB02111_ANALFRANQUIA = 'M' THEN TB02113_VALOR
+                                  WHEN TB02111_ANALFRANQUIA = 'G' THEN TB02186_VALOR
+                                  END, 'C', 'pt-br') valor,
+                        
+                        
+                              TB02113_VALOR Excedente,
+                        
+                          TB01049_NOME Franquia,
+                          TB01049_VARIAVEL TipoCobertura,
+                          TB01049_TIPORATEIO TipoRateio
+                        
+                        
+                        FROM TB02021
+                        LEFT JOIN TB02022 ON TB02022_CODIGO = TB02021_CODIGO 
+                        LEFT JOIN TB01007 ON TB01007_CODIGO = TB02021_CODEMP
+                        LEFT JOIN TB01008 ON TB01008_CODIGO = TB02021_CODCLI
+                        LEFT JOIN TB00012 EMP ON EMP.TB00012_CODIGO = TB02021_CODEMP AND EMP.TB00012_TABELA = 'TB01007' AND EMP.TB00012_TIPO = '01'
+                        LEFT JOIN TB00012 CLI ON CLI.TB00012_CODIGO = TB02021_CODCLI AND CLI.TB00012_TABELA = 'TB01008' AND CLI.TB00012_TIPO = '01'
+                        LEFT JOIN TB02111 ON TB02111_CODIGO = TB02021_CONTRATO
+                        LEFT JOIN TB02112 ON TB02112_CODIGO = TB02111_CODIGO AND TB02112_PRODUTO = TB02022_PRODUTO
+                        LEFT JOIN TB01010 ON TB01010_CODIGO = TB02022_PRODUTO
+                        LEFT JOIN TB02055 ON TB02055_PRODUTO = TB02022_PRODUTO AND TB02022_CODIGO = TB02055_CODIGO AND TB02055_OPERACAO = 'S' AND TB02055_NUMSERIE = TB02112_NUMSERIE
+                        LEFT JOIN TB02176 ON TB02176_CODIGO = TB02021_CODSITE 
+                        LEFT JOIN TB02054 ON TB02054_PRODUTO = TB02112_PRODUTO AND TB02054_NUMSERIE = TB02112_NUMSERIE
+                        LEFT JOIN TB02115 ON TB02115_CONTRATO = TB02021_CONTRATO AND TB02115_PRODUTO = TB02022_PRODUTO AND TB02115_NUMSERIE = TB02112_NUMSERIE
+                        LEFT JOIN TB02113 ON TB02113_PRODUTO = TB02112_PRODUTO AND TB02113_NUMSERIE = TB02112_NUMSERIE AND TB02113_CODIGO = TB02112_CODIGO
+                        LEFT JOIN TB01049 ON TB01049_CODIGO = TB02113_COBERTURA
+                        LEFT JOIN TB02185 ON TB02185_CONTRATO = TB02111_CODIGO
+                        LEFT JOIN TB02186 ON TB02186_GRUPO = TB02112_GRUPO
+                        WHERE 
+                          TB02021_TIPODESC = '13'
+                          AND TB02055_NUMSERIE = '$row[NumSerie]'
+                          AND TB02021_CODIGO = '$row[Venda]'
+                          AND TB02111_CODIGO = '$row[Contrato]'
                                   ";
           $stmt1 = sqlsrv_query($conn, $sql1);
 
