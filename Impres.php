@@ -55,8 +55,6 @@ header('Content-type: text/html; charset=ISO-8895-1');
   }
 </style>
 </body>
-
-
 <!-- example 2 - using auto margins -->
 <nav class="divcentral">
   <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
@@ -82,7 +80,6 @@ header('Content-type: text/html; charset=ISO-8895-1');
         </form>
       </div>
     </a>
-
   </div>
   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
   </div>
