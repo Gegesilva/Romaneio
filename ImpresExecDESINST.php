@@ -127,7 +127,7 @@
                 TB02030_CODIGO Pedido,
                 TB01010_NOME Equipamento,
                 ISNULL(TB02208_PAT, TB02054_PAT) Patrimonio,
-                TB02176_END EndEquip,
+                CONCAT(TB02176_END, ' - ', TB02176_NUM, ' - ', TB02176_BAIRRO, ' - ', TB02176_CIDADE, ' - ', TB02176_ESTADO) EndEquip,
                 TB02031_PRODUTO Produto,
                 COALESCE((SELECT TOP 1 TB02115_CONTPB FROM TB02115 WHERE TB02115_CONTRATO = TB02111_CODIGO AND TB02115_PRODUTO = TB02031_PRODUTO AND TB02115_NUMSERIE = TB02055_NUMSERIE AND TB02115_CODCLI = '00000000' ORDER BY TB02115_DATA DESC),
                 TB02054_MEDIDORPB) LeituraInicial,
@@ -338,7 +338,7 @@
 
           $tabela .= "<tr>";
           $tabela .= "<td width = '60%;'>
-                          Onde estava instalado o equipamento:</br>
+                          Contratante responsável pelo equipamento:</br>
                           $NomeCli, com inscrição no CNPJ nº $CNPJCli, IE nº $InscricaoEstCli,
                           localizado na $RuaCli, $NumCli, bairro $BairroCli, CEP $CEPCli, na $CidadeUFCli, segundo Contrato de Locação de Bens Móveis número $Contrato.
                           </br>Motivo da desinstalação: $Motivo.

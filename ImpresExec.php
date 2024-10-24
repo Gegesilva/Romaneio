@@ -121,7 +121,7 @@
           TB02021_CODIGO Venda,
           TB01010_NOME Equipamento,
           TB02112_PAT Patrimonio,
-          TB02176_END EndEquip,
+          CONCAT(TB02176_END, ' - ', TB02176_NUM, ' - ', TB02176_BAIRRO, ' - ', TB02176_CIDADE, ' - ', TB02176_ESTADO) EndEquip,
           TB02022_PRODUTO Produto,
           COALESCE(
             (SELECT TOP 1 
