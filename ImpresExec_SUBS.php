@@ -1,50 +1,52 @@
-﻿
-<?php
-  $cod = $_POST['cod'];
-  include_once("conexaoSQL.php");
+﻿<?php
+$cod = $_POST['cod'];
+include_once("conexaoSQL.php");
 ?>
 
 
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="css/main.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-    <script>
-            function GerarCódigoDeBarras(elementoInput){
-                if(!elementoInput.value){
-                    elementoInput.value = 0;
-                }
-                JsBarcode('#codBarras', elementoInput.value);
-            }
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="css/main.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-            window.onload = function () {
-            JsBarcode(".barcode").init();
-          }
+  <script>
+    function GerarCódigoDeBarras(elementoInput) {
+      if (!elementoInput.value) {
+        elementoInput.value = 0;
+      }
+      JsBarcode('#codBarras', elementoInput.value);
+    }
+
+    window.onload = function () {
+      JsBarcode(".barcode").init();
+    }
 
 
-        </script>
+  </script>
 
-    <title>DATABIT</title>
-  </head>
+  <title>DATABIT</title>
+</head>
+
 <body>
   <a href="impres_SUBS.php">
     <img src="media/logo.png" width="100px" height="24px" alt="Logo">
   </a>
   <div class="nome-doc">
     <div class='titulo-cab'><b>TERMO DE SUBSTITUIÇÃO DE EQUIPAMENTO - REMESSA</b></div>
- </div>
+  </div>
 
-<div class="cabeçalho">
+  <div class="cabeçalho">
 
     <?php
-        $sql = "
+    $sql = "
               SELECT DISTINCT
                   --EMPRESA
                   TB02021_CODIGO Venda,
@@ -84,22 +86,20 @@
                 AND TB02021_CODIGO = '$cod'
           
         ";
-      $stmt = sqlsrv_query($conn, $sql);
-        
-        if($stmt === false)
-        {
-          die (print_r(sqlsrv_errors(), true));
-        }
-      ?>            
-      <table class="table table-borderless table-sm" style="font-size: 11px;">
-                  
+    $stmt = sqlsrv_query($conn, $sql);
+
+    if ($stmt === false) {
+      die(print_r(sqlsrv_errors(), true));
+    }
+    ?>
+    <table class="table table-borderless table-sm" style="font-size: 11px;">
+
       <?php
       $tabela = "";
 
-      while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC))
-      {
-            $tabela .= "<tr>";
-            $tabela .= "<td width = '60%;'>
+      while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $tabela .= "<tr>";
+        $tabela .= "<td width = '60%;'>
                             $row[NomeCli], com inscrição no CNPJ nº $row[CNPJCli], IE nº $row[InscricaoEstCli],
                             localizado na $row[RuaCli], $row[NumCli], bairro $row[BairroCli], CEP $row[CEPCli], na cidade de
                             $row[CidadeUFCli], declara ter recebido o Equipamento Enviado, denominado Impressora, em perfeito
@@ -109,19 +109,19 @@
                             Móveis número: $row[Contrato]. Assumindo ainda, a responsabilidade legal da condição de fiel depositário, pelo
                             zelo e pela integridade física do equipamento de propriedade de $row[NomeEmp].
                         </td>";
-            $tabela .= "</tr>";
+        $tabela .= "</tr>";
 
-            $cidade = $row['CidadeUFCli'];
+        $cidade = $row['CidadeUFCli'];
       }
-        $tabela .= "</table>";
-        
-      print($tabela);
-      ?>  
-</div>                                                     
-<div class="meio">
-  <div class="dadosprod">
-   <?php
-        $sql = " 
+      $tabela .= "</table>";
+
+      print ($tabela);
+      ?>
+  </div>
+  <div class="meio">
+    <div class="dadosprod">
+      <?php
+      $sql = " 
         SELECT DISTINCT
               TB02055_NUMSERIE NumSerie,
               TB02021_CODIGO Venda,
@@ -158,38 +158,36 @@
             AND TB02021_CODIGO = '$cod' 
         ";
       $stmt = sqlsrv_query($conn, $sql);
-        
-        if($stmt === false)
-        {
-          die (print_r(sqlsrv_errors(), true));
-        }
+
+      if ($stmt === false) {
+        die(print_r(sqlsrv_errors(), true));
+      }
       ?>
 
-    <table class="table table-borderless table-sm" style="font-size: 11px;">
-      <?php
-      $tabela = "";
+      <table class="table table-borderless table-sm" style="font-size: 11px;">
+        <?php
+        $tabela = "";
 
-      while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC))
-      {
-            $tabela .= "<tr>";
-            $tabela .= "<td width = '60%;'><b>Equipamento: </b>&nbsp;".$row['Equipamento']."</td>";
-            $tabela .= "</tr>";
-            $tabela .= "<tr>";
-            $tabela .= "<td width = '60%;'><b>Patrimônio: </b>&nbsp;".$row['Patrimonio']."</td>";
-            $tabela .= "</tr>";
-            $tabela .= "<tr>";
-            $tabela .= "<td width = '60%;'><b>Nº de Série: </b>&nbsp;".$row['NumSerie']."</td>";
-            $tabela .= "</tr>";
-            $tabela .= "<tr>";
-            $tabela .= "<td width = '60%;'><b>Local de Instalação: </b>&nbsp;".$row['EndEquip']."</td>";
-            $tabela .= "</tr>";
-            $tabela .= "<tr>";
-            $tabela .= "<td width = '60%;'><b>Leitura Inicial: </b>&nbsp;".$row['LeituraInicial']."</td>";
-            $tabela .= "</tr>";
-            $tabela .= "<tr>";
-            $tabela .= "<td width = '60%;'><b>Medidor </b></td>";
-            $tabela .= "</tr>";
-                          $sql1 = " 
+        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+          $tabela .= "<tr>";
+          $tabela .= "<td width = '60%;'><b>Equipamento: </b>&nbsp;" . $row['Equipamento'] . "</td>";
+          $tabela .= "</tr>";
+          $tabela .= "<tr>";
+          $tabela .= "<td width = '60%;'><b>Patrimônio: </b>&nbsp;" . $row['Patrimonio'] . "</td>";
+          $tabela .= "</tr>";
+          $tabela .= "<tr>";
+          $tabela .= "<td width = '60%;'><b>Nº de Série: </b>&nbsp;" . $row['NumSerie'] . "</td>";
+          $tabela .= "</tr>";
+          $tabela .= "<tr>";
+          $tabela .= "<td width = '60%;'><b>Local de Instalação: </b>&nbsp;" . $row['EndEquip'] . "</td>";
+          $tabela .= "</tr>";
+          $tabela .= "<tr>";
+          $tabela .= "<td width = '60%;'><b>Leitura Inicial: </b>&nbsp;" . $row['LeituraInicial'] . "</td>";
+          $tabela .= "</tr>";
+          $tabela .= "<tr>";
+          $tabela .= "<td width = '60%;'><b>Medidor </b></td>";
+          $tabela .= "</tr>";
+          $sql1 = " 
                                       SELECT DISTINCT
                                               --EMPRESA
                                             TB02021_CODIGO Venda,
@@ -254,49 +252,45 @@
                                             AND TB02021_CODIGO = '$row[Venda]'
                                             AND TB02111_CODIGO = '$row[Contrato]'
                                   ";
-                              $stmt1 = sqlsrv_query($conn, $sql1);
-                                
-                              while ($row1 = sqlsrv_fetch_array($stmt1, SQLSRV_FETCH_ASSOC))
-                              {
-                                $franquia = $row1['Franquia']." ";
-                                $paginas = $row1['Paginas']." Páginas ";
-                                $vlrPaginas = $row1['Franquia']." " .$row1['valor'];
-                                $excedente = $row1['Franquia']." " .$row1['valor']." por página excedente";
-                                $valor = $row1['valor'];
+          $stmt1 = sqlsrv_query($conn, $sql1);
+
+          while ($row1 = sqlsrv_fetch_array($stmt1, SQLSRV_FETCH_ASSOC)) {
+            $franquia = $row1['Franquia'] . " ";
+            $paginas = $row1['Paginas'] . " Páginas ";
+            $vlrPaginas = $row1['Franquia'] . " " . $row1['valor'];
+            $excedente = $row1['Franquia'] . " " . $row1['valor'] . " por página excedente";
+            $valor = $row1['valor'];
 
 
-                                if($row1['TipoCobertura'] == 'N' && $row1['TipoRateio'] != 4){
-                                  $textoMedidor = $franquia." ".$paginas."Valor: ".$valor;
-                                }
-                                  elseif($row1['TipoCobertura'] == 'E'){
-                                    $textoMedidor = $excedente;
-                                  }
-                                    elseif($row1['TipoCobertura'] == 'S'){
-                                      $textoMedidor = $vlrPaginas." por página.";
-                                    }
-                                      elseif($row1['TipoCobertura'] == 'N' && $row1['TipoRateio'] == 4){
-                                          $textoMedidor = $vlrPaginas;
-                                      }
+            if ($row1['TipoCobertura'] == 'N' && $row1['TipoRateio'] != 4) {
+              $textoMedidor = $franquia . " " . $paginas . "Valor: " . $valor;
+            } elseif ($row1['TipoCobertura'] == 'E') {
+              $textoMedidor = $excedente;
+            } elseif ($row1['TipoCobertura'] == 'S') {
+              $textoMedidor = $vlrPaginas . " por página.";
+            } elseif ($row1['TipoCobertura'] == 'N' && $row1['TipoRateio'] == 4) {
+              $textoMedidor = $vlrPaginas;
+            }
 
-                                    $tabela .= "<tr>";
-                                    $tabela.= "<td>&nbsp; $textoMedidor </td>";
-                                    $tabela.= "</tr>";
-                              } 
-              /* $tabela .= "<tr><td></td></tr>  <tr><td></td></tr>  <tr><td></td></tr>"; */                               
-      }
+            $tabela .= "<tr>";
+            $tabela .= "<td>&nbsp; $textoMedidor </td>";
+            $tabela .= "</tr>";
+          }
+          /* $tabela .= "<tr><td></td></tr>  <tr><td></td></tr>  <tr><td></td></tr>"; */
+        }
         $tabela .= "</table>";
-        
-      print($tabela);
-    ?> 
-  </div>
-  
-  <div class="info-central">
-    <div class='info'><?php echo $cidade;?>, <?php echo date('d/m/Y'); ?></div>
-  </div>
 
-<hr> <!-- LINHA CENTRAL -->
+        print ($tabela);
+        ?>
+    </div>
 
-   <div class="table-assin">                            
+    <div class="info-central">
+      <div class='info'><?php echo $cidade; ?>, <?php echo date('d/m/Y'); ?></div>
+    </div>
+
+    <hr> <!-- LINHA CENTRAL -->
+
+    <div class="table-assin">
       <table>
         <thead>
           <tr>
@@ -307,9 +301,15 @@
           <tr>
             <td>Nome: _______________________________</td>
           </tr>
-          <tr><td> </td></tr>
-          <tr><td> </td></tr>
-          <tr><td> </td></tr>
+          <tr>
+            <td> </td>
+          </tr>
+          <tr>
+            <td> </td>
+          </tr>
+          <tr>
+            <td> </td>
+          </tr>
           <tr>
             <td>CPF: ________________________________</td>
           </tr>
@@ -326,35 +326,42 @@
           <tr>
             <td>Nome: _______________________________</td>
           </tr>
-          <tr><td> </td></tr>
-          <tr><td> </td></tr>
-          <tr><td> </td></tr>
+          <tr>
+            <td> </td>
+          </tr>
+          <tr>
+            <td> </td>
+          </tr>
+          <tr>
+            <td> </td>
+          </tr>
           <tr>
             <td>CPF: ________________________________</td>
           </tr>
         </tbody>
       </table>
-  </div> 
+    </div>
 
-   <table class="table table-border table-sm" style="font-size: 11px;">
+    <table class="table table-border table-sm" style="font-size: 11px;">
 
-   </table>
-   <div class="partedebaixo">
-        <div class="dizeres-finais">
-          <p>
-            Observações:
-            Se houver necessidade do técnico imprimir páginas de teste no equipamento enviado, ele poderá fazê-lo.
-            Em caso de solicitação de dedução das páginas teste impressas pelo técnico, estas serão descontadas.
-            Solicito o desconto de ________ página(s) impressa(s) utilizadas para teste.
-          </p>
-        </div>
-          <div class="table-assin2">                            
-              <div>_________________________________________</br><b class="assin">Cliente</b></div>
-                &nbsp;
-              <div>_________________________________________</br><b class="assin">Técnico Responsável</b></div>
-                &nbsp;
-          </div> 
-  </div> 
-</div>
+    </table>
+    <div class="partedebaixo">
+      <div class="dizeres-finais">
+        <p>
+          Observações:
+          Se houver necessidade do técnico imprimir páginas de teste no equipamento enviado, ele poderá fazê-lo.
+          Em caso de solicitação de dedução das páginas teste impressas pelo técnico, estas serão descontadas.
+          Solicito o desconto de ________ página(s) impressa(s) utilizadas para teste.
+        </p>
+      </div>
+      <div class="table-assin2">
+        <div>_________________________________________</br><b class="assin">Cliente</b></div>
+        &nbsp;
+        <div>_________________________________________</br><b class="assin">Técnico Responsável</b></div>
+        &nbsp;
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>
